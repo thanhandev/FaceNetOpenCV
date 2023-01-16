@@ -5,7 +5,7 @@ cam = cv2.VideoCapture(0)#cấu hình địa chỉ camera
 cam.set(3, 640) # cài chiều rộng video
 cam.set(4, 480) # cài chiều cao video
 
-face_detector = cv2.CascadeClassifier('facenet_oppencv.xml') 
+face_detector = cv2.CascadeClassifier('facenet_opencv.xml') 
 #sử dụng opencv tách khuôn mặt
 
 # Nhập ID:
