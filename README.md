@@ -9,6 +9,14 @@ Install OpenCV - Numpy - OpenCV contrib - Pillow - Pyserial for this Project.
 
 **pip install pillow**
 
+Creat dataset folder: 
+
+**mkdir dataset**
+
+Creat trainer folder:
+
+**mkdir trainer**
+
 Face Recognition by command:
 
 **python face_lock.py**
