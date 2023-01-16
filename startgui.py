@@ -8,16 +8,16 @@ window.configure(bg='lavender')
 
 
 def detect():
-	os.system('python3 face_lock.py')
+	os.system('python face_lock.py')
 	window.destroy()
 def addface():
-	os.system('python3 add_face.py')
+	os.system('python add_face.py')
 	window.destroy()
 def train():
-	os.system('python3 training.py')
+	os.system('python training.py')
 	window.destroy()
 def diemdanh():
-	os.system('python3 diemdanh.py')
+	os.system('python diemdanh.py')
 	window.destroy()
 Label(window, text='Mời chọn chương trình:',bg='skyblue').grid(row=0,column=0)
 
