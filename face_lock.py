@@ -47,9 +47,6 @@ while True:
        )
 
     for(x,y,w,h) in faces:
-        GPIO.output(MODE,GPIO.HIGH)
-        GPIO.output(RELAY,GPIO.LOW)
-        GPIO.output(P,GPIO.LOW)
 
         cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
 
