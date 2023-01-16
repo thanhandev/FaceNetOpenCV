@@ -1,25 +1,11 @@
 from tkinter import *
 import os
-import RPi.GPIO as GPIO
 
 window = Tk()
 window.geometry('800x1000')
 window.title('HỆ THỐNG NHẬN DIỆN KHUÔN MẶT')
 window.configure(bg='lavender')
 
-RELAY = 5
-P = 6
-MODE = 13
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(RELAY, GPIO.OUT)
-GPIO.output(RELAY,GPIO.LOW)
-
-GPIO.setup(P, GPIO.OUT)
-GPIO.output(P,GPIO.LOW)
-
-GPIO.setup(MODE, GPIO.OUT)
-GPIO.output(MODE,GPIO.LOW)
 
 def detect():
 	os.system('python3 face_lock.py')
