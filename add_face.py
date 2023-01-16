@@ -5,8 +5,8 @@ cam = cv2.VideoCapture(0)#cấu hình địa chỉ camera
 cam.set(3, 640) # cài chiều rộng video
 cam.set(4, 480) # cài chiều cao video
 
-face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml') 
-#sử dụng haarcascade_frontalface_default tách khuôn mặt
+face_detector = cv2.CascadeClassifier('facenet_oppencv.xml') 
+#sử dụng opencv tách khuôn mặt
 
 # Nhập ID:
 face_id = input('\n Nhap ID roi bam Enter <return> ==>  ')
@@ -23,7 +23,7 @@ while(True):
     faces = face_detector.detectMultiScale(gray, 1.3, 5)
 
     for (x,y,w,h) in faces:
-
+        #cat tah khuon mat
         cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)     
         count += 1
 
