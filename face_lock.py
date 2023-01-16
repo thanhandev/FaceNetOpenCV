@@ -1,27 +1,15 @@
 import cv2
 import numpy as np
 import os 
-import RPi.GPIO as GPIO
 import time
 from time import sleep
-RELAY = 5
-P = 6
-MODE = 13
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(RELAY, GPIO.OUT)
-GPIO.output(RELAY,GPIO.LOW)
-
-GPIO.setup(P, GPIO.OUT)
-GPIO.output(P,GPIO.LOW)
-
-GPIO.setup(MODE, GPIO.OUT)
-GPIO.output(MODE,GPIO.HIGH)
-
+#phat hien khuon mat su dung OpenCV:
 recognizer = cv2.face.LBPHFaceRecognizer_create()
+#lay co so du lieu da dao tao:
 recognizer.read('trainer/trainer.yml')
-cascadePath = "haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascadePath);
+#trinh nhan dien khuon mat
+FaceNet = "facenet_opencv.xml"
+FacerRecognition = cv2.CascadeClassifier(FaceNet);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -49,14 +37,9 @@ while True:
     ret, img =cam.read()
     img = cv2.flip(img, 1) # Flip vertically
     
-    GPIO.output(MODE,GPIO.HIGH)
-    GPIO.output(RELAY,GPIO.LOW)
-    GPIO.output(P,GPIO.LOW)
-
-    
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-    faces = faceCascade.detectMultiScale( 
+    faces = FacerRecognition.detectMultiScale( 
         gray,
         scaleFactor = 1.2,
         minNeighbors = 5,
@@ -76,14 +59,9 @@ while True:
         if (confidence < 45):
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
-            GPIO.output(RELAY,GPIO.HIGH)
-            sleep(0.1)
         else:
             id = "Khong xac dinh"
             confidence = "  {0}%".format(round(100 - confidence))
-            GPIO.output(RELAY,GPIO.LOW)
-            GPIO.output(P,GPIO.LOW)
-            sleep(0.1)
         cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
         cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)  
     
