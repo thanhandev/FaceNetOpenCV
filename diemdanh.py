@@ -1,32 +1,20 @@
 import cv2
 import numpy as np
 import os 
-import RPi.GPIO as GPIO
 import time
 from time import sleep
 from openpyxl import Workbook
 
-RELAY = 5
-P = 6
-MODE = 13
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(RELAY, GPIO.OUT)
-GPIO.output(RELAY,GPIO.LOW)
-
-GPIO.setup(P, GPIO.OUT)
-GPIO.output(P,GPIO.LOW)
-
-GPIO.setup(MODE, GPIO.OUT)
-GPIO.output(MODE,GPIO.LOW)
-
 wb = Workbook()
 sheet = wb.active
 temp =''
+#phat hien khuon mat su dung OpenCV:
 recognizer = cv2.face.LBPHFaceRecognizer_create()
+#lay co so du lieu da dao tao:
 recognizer.read('trainer/trainer.yml')
-cascadePath = "haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascadePath);
+#trinh nhan dien khuon mat
+FaceNet = "facenet_opencv.xml"
+FacerRecognition = cv2.CascadeClassifier(FaceNet);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 dem = 0
@@ -62,14 +50,14 @@ while True:
         minNeighbors = 5,
         minSize = (int(minW), int(minH)),
        )
-
+    #kiem tra khuon mat dang chuyen dong:
     for(x,y,w,h) in faces:
-
+        #ve hinh vuong len khuon mat
         cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
 
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
-        # Check if confidence is less them 100 ==> "0" is perfect match 
+        # Tra ket qua: 
         if (confidence < 45):
             dem += 1
             id = names[id]
