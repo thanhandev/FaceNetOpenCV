@@ -8,7 +8,7 @@ import os
 path = 'dataset'
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml");
+detector = cv2.CascadeClassifier("facenet_opencv.xml");
 
 # hàm tạo nhãn từ ảnh
 def getImagesAndLabels(path):
